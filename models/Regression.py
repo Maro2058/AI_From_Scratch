@@ -1,42 +1,31 @@
 import numpy as np
 import scipy.io as sio
+from data.data_manipulation import add_dummy_variable
+from models.base_model import model
 
-# General Use Functions
-def add_dummy_variable(X, numberOfDummy = 1):
-    instances , features = np.shape(X)
-    new_columns = np.ones([instances, numberOfDummy])
-    X_new = np.concatenate((X, new_columns), axis=1)
-    return X_new
+class LinearRegression(model):
+    def __init__(self, penalty ):
+        self.weights = None
+        self.intercept = None
+        self.penalty = penalty
 
-def polynomial_features(X, degree):
-    return
+    def predict(self, X):
+        return NotImplemented
+    
+    def get_paramaters(self):
+        print(self.weights)
+        print(self.intercept)
+        
+    
+    def set_paramaters(self, weights = None, intercept = None):
+        self.weights = weights
+        self.intercept = intercept
 
-def MSE(y, y_pred):
-    return
-
-def accuracy(y, y_pred):
-    return
-
-def train_test_split(X, y, shuffle = False):
-    if shuffle == True:
-        return
-    # Shuffle Data
-    # 80-20 split
-    return
-
-def train_val_test_split(X, y, shuffle = False):
-    if shuffle == True:
-        return
-    # Shuffle Data
-    # 80-20 split
-    return
-
-class LinearRegression():
+class OldLinearRegression():
 
     # Consider adding Momentum later
     def __init__(self, penalty = None, lr = 0.01):
         self.weights = None
-        self.intercept = None
         self.penalty = penalty
         self.lr = lr
 
@@ -64,10 +53,3 @@ class LinearRegression():
     def train_elastic(self, X, y):
         return
 
-w0 = 1
-w1 = 3
-w2 = 5
-X = 2*np.random.rand(100,1)
-y = w2*X + w0 + np.random.randn(100, 1)
-linear = LinearRegression()
-print(linear.train_least_squares(X, y))
