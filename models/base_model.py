@@ -7,17 +7,30 @@ class Model(ABC):
     
     def __init__(self):
         self.weights = None
-        self.bias = None
         self.is_trained = False
-        self.hyperparameters = {}
+        self.solver = None
+        self.loss = None
+        self.metrics = []
+
+    @abstractmethod
+    def compile(self, Solver, loss, metrics):
+        self.solver = Solver
+        self.loss = loss
+        self.metrics = metrics or []
 
     # Forward Pass: w*X
+    def _forward(self, X):
+        raise NotImplementedError
+    
     @abstractmethod
     def predict(self, X : np.ndarray):
         raise NotImplementedError
     
     # Backward Pass: dL/dw = dL/dy_pred * dy_pred/dw
-    def gradient(self, dL_dypred):
+    def _gradient(self, dL_dy, cache):
+        pass
+
+    def train(self, X, y):
         pass
     
     @abstractmethod

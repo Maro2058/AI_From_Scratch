@@ -1,9 +1,7 @@
-from solvers.base_solver import solver
+import numpy as np
+from solvers.base_solver import Optimizer
 
-class GradientDescent(solver):
-    def MiniBatchGD(eta, epochs, ):
-        return
-
-    def MSEGradientVector(m, X, y, weights):
-        return
-        
+class GradientDescent(Optimizer):
+    def step(self, params, grads, eta = 0.1):
+        params = params - eta * grads
+        return params

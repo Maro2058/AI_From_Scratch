@@ -1,8 +1,20 @@
 import numpy as np
 import scipy as sio
+from losses.base_loss import Loss
 
-def MSE(y, y_pred):
-    return
+class MSE(Loss):
+    def value(self, y, y_pred):
+        m = y.shape[0]
+        error = y - y_pred
+        MSE = (error**2).sum() / m
+        return MSE
+    
+    def backward(self, y, y_pred):
+        m = y.shape[0]
+        dL_dy = (2/m) * (y_pred - y)
+        return dL_dy
+
+
 
 def accuracy(y, y_pred):
     return

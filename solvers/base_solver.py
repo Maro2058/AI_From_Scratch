@@ -1,20 +1,18 @@
 import numpy as np
-from models.base_model import Model
-from losses.base_loss import Loss
 from abc import ABC, abstractmethod
 
-class Optimizer(ABC):
-    required_capabilities = {}
 
-    def __init__(self, params, lr=0.01):
-        if lr <= 0:
-            raise ValueError(f"Invalid learning rate: {lr}")
+class Solver(ABC):
+    pass
+
+class Optimizer(Solver):
+    required_capabilities = {}
         
     @abstractmethod
-    def step(self, params, grads):
+    def step(self, params, grads, eta):
         raise NotImplementedError
 
-class Estimator(ABC):
+class Estimator(Solver):
     required_capabilities = {}
 
     @abstractmethod
